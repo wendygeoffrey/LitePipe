@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.google.litube"
+    namespace = "com.hhst.youtubelite"
     compileSdk = 36
 
     lint {
@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.hhst.LitePipe"
+        applicationId = "com.google.LitePipe"
         minSdk = 26
         targetSdk = 36
         versionCode = 202
