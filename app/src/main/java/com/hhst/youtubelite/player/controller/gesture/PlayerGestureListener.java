@@ -37,7 +37,7 @@ public class PlayerGestureListener extends GestureDetector.SimpleOnGestureListen
     private final Runnable hideHintRunnable;
 
     private int gestureMode = 0;
-    private float bri = -1, preLongPressSpeed = 1.0f;
+    private float preLongPressSpeed = 1.0f;
     private boolean isLongPressing = false, isGesturing = false, fullscreenSwipeTriggered = false;
     private long scrollStartPosition = 0;
 
@@ -79,7 +79,6 @@ public class PlayerGestureListener extends GestureDetector.SimpleOnGestureListen
         if (!isEnabled()) return false;
         handler.removeCallbacks(hideHintRunnable);
         gestureMode = 0;
-        bri = -1;
         vol = -1;
         isGesturing = false;
         fullscreenSwipeTriggered = false;
@@ -132,8 +131,7 @@ public class PlayerGestureListener extends GestureDetector.SimpleOnGestureListen
             isGesturing = true;
             handler.removeCallbacks(hideHintRunnable);
             float x = e1.getX(), width = playerView.getWidth();
-            if (x < width * 0.35f) adjustBrightness(dy);
-            else if (x > width * 0.65f) adjustVolume(dy);
+            if (x > width * 0.65f) adjustVolume(dy);
             else handleCenterVerticalFullscreenGesture(e1, e2);
             handler.postDelayed(hideHintRunnable, AUTO_HIDE_DELAY_MS);
         } else if (gestureMode == 2) {
@@ -165,25 +163,6 @@ public class PlayerGestureListener extends GestureDetector.SimpleOnGestureListen
         return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
-    private void adjustBrightness(float dy) {
-        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        if (bri == -1) {
-            bri = lp.screenBrightness;
-            if (bri < 0) {
-                try {
-                    float systemBri = Settings.System.getInt(activity.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-                    bri = systemBri / 255.0f;
-                } catch (Settings.SettingNotFoundException e) {
-                    bri = 0.5f;
-                }
-            }
-        }
-        float delta = (dy / playerView.getHeight()) * 1.5f;
-        bri = Math.min(Math.max(bri + delta, 0.01f), 1.0f);
-        lp.screenBrightness = bri;
-        activity.getWindow().setAttributes(lp);
-        controller.showHint(Math.round(bri * 100) + "%", -1);
-    }
 
     private void adjustVolume(float dy) {
         final AudioManager am = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
