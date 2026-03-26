@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hhst.youtubelite"
+    namespace = "com.google.litube"
     compileSdk = 36
 
     lint {
