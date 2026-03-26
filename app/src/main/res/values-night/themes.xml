@@ -25,6 +25,9 @@
         <item name="bottomSheetDialogTheme">@style/Theme.YoutubeLite.BottomSheetDialog</item>
 
         <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="28">shortEdges</item>
+        <item name="android:navigationBarColor">#1A1A1A</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <style name="Theme.YoutubeLite" parent="Base.Theme.YoutubeLite" />
