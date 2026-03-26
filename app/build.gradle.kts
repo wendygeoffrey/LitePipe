@@ -23,7 +23,7 @@ android {
 
         // Only include ARM architectures for production to save space
         ndk {
-            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
+            abiFilters.addAll(listOf("arm64-v8a"))
         }
 
         // Limit resources to supported languages to reduce size
