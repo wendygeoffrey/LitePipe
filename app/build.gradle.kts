@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.google.LitePipe"
+        applicationId = "com.google.litube"
         minSdk = 26
         targetSdk = 36
         versionCode = 202
